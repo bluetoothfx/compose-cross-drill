@@ -12,7 +12,7 @@ class DashboardViewModel(private val dashboardRepository: DashboardRepository) :
     private val _users = mutableStateOf<List<User>>(emptyList())
     val users: State<List<User>> = _users
 
-    suspend fun getUsers(inputStream: InputStream){
+    suspend fun getUsers(inputStream: InputStream) {
         _users.value = dashboardRepository.getUsers(inputStream)
     }
 }

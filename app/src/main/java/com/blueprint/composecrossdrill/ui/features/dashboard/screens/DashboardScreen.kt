@@ -24,11 +24,13 @@ import com.blueprint.composecrossdrill.ui.features.dashboard.viewmodel.MyViewMod
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DashboardScreen(dashboardViewModel: DashboardViewModel = viewModel(
-    factory = MyViewModelFactory(
-        DashboardRepositoryImpl()
+fun DashboardScreen(
+    dashboardViewModel: DashboardViewModel = viewModel(
+        factory = MyViewModelFactory(
+            DashboardRepositoryImpl()
+        )
     )
-)) {
+) {
     val context = LocalContext.current
     val users by dashboardViewModel.users
 
@@ -41,14 +43,14 @@ fun DashboardScreen(dashboardViewModel: DashboardViewModel = viewModel(
         topBar = {
             TopAppBar(title = { Text("Dashboard") }, navigationIcon = {
                 IconButton(onClick = { }) {
-                    Icon(Icons.Default.Menu, contentDescription = "Back")
+                    Icon(Icons.Default.Menu, contentDescription = "Menu")
                 }
             })
         }
     ) { innerPadding ->
         LazyColumn(modifier = Modifier.padding(innerPadding)) {
-            items(users.size) { user ->
-                Text("ID: $user")
+            items(users.size) { pos ->
+                UserCard(users[pos])
             }
         }
     }
