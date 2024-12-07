@@ -1,5 +1,8 @@
 package com.blueprint.composecrossdrill.ui.features.dashboard.screens
 
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.height
@@ -22,9 +25,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.ColorPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import coil3.compose.AsyncImage
 import com.blueprint.composecrossdrill.R
 import com.blueprint.composecrossdrill.data.repository.DashboardRepositoryImpl
 import com.blueprint.composecrossdrill.ui.features.dashboard.viewmodel.DashboardViewModel
@@ -71,7 +76,17 @@ fun DashboardScreen(
                     .height(200.dp),
                 contentScale = ContentScale.FillWidth,
             )
-
+            AsyncImage(
+                model = "https://fastly.picsum.photos/id/12/2500/1667.jpg?hmac=Pe3284luVre9ZqNzv1jMFpLihFI6lwq7TPgMSsNXw2w",
+                contentDescription = "Coil Sample",
+                //placeholder = painterResource(R.drawable.placeholder),
+                //error = painterResource(R.drawable.error),
+                onSuccess = {
+                    /* Handle success */
+                },
+                onLoading = { /* Show loading spinner */ },
+                onError = { /* Handle error */ },
+            )
             LazyColumn {
                 items(users.size) { pos ->
                     UserCard(users[pos])

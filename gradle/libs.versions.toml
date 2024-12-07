@@ -1,5 +1,6 @@
 [versions]
 agp = "8.7.2"
+coilCompose = "3.0.4"
 compose = "1.0.0-beta01"
 gson = "2.10.1"
 jacksonDatabind = "2.15.2"
@@ -16,6 +17,8 @@ composeBom = "2024.04.01"
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycleRuntimeKtx" }
+coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coilCompose" }
+coil-network-okhttp = { module = "io.coil-kt.coil3:coil-network-okhttp", version.ref = "coilCompose" }
 compose = { module = "com.github.bumptech.glide:compose", version.ref = "compose" }
 gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 jackson-databind = { module = "com.fasterxml.jackson.core:jackson-databind", version.ref = "jacksonDatabind" }
