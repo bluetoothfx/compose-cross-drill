@@ -51,6 +51,10 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.gson)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation(libs.compose)
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
+    implementation(libs.picasso)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
