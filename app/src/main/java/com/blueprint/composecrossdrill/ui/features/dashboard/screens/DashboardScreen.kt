@@ -1,8 +1,5 @@
 package com.blueprint.composecrossdrill.ui.features.dashboard.screens
 
-import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.height
@@ -21,8 +18,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.ColorPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -68,24 +63,28 @@ fun DashboardScreen(
             GlideImage(
                 model = "https://fastly.picsum.photos/id/26/4209/2769.jpg?hmac=vcInmowFvPCyKGtV7Vfh7zWcA_Z0kStrPDW3ppP0iGI",
                 contentDescription = "Glide Sample",
-                loading = placeholder(ColorPainter(Color.Red)),
                 modifier = Modifier
                     .padding(innerPadding)
                     .clickable(onClick = {})
                     .align(Alignment.CenterHorizontally)
-                    .height(200.dp),
+                    .height(100.dp),
+                loading = placeholder(R.drawable.ic_loading),
+                failure = placeholder(R.drawable.ic_error),
                 contentScale = ContentScale.FillWidth,
             )
             AsyncImage(
                 model = "https://fastly.picsum.photos/id/12/2500/1667.jpg?hmac=Pe3284luVre9ZqNzv1jMFpLihFI6lwq7TPgMSsNXw2w",
                 contentDescription = "Coil Sample",
-                //placeholder = painterResource(R.drawable.placeholder),
-                //error = painterResource(R.drawable.error),
+                modifier = Modifier
+                    .clickable(onClick = {})
+                    .height(100.dp),
+                contentScale = ContentScale.FillWidth,
+                placeholder = painterResource(R.drawable.ic_loading),
+                error = painterResource(R.drawable.ic_error),
                 onSuccess = {
                     /* Handle success */
                 },
                 onLoading = { /* Show loading spinner */ },
-                onError = { /* Handle error */ },
             )
             LazyColumn {
                 items(users.size) { pos ->
