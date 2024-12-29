@@ -65,6 +65,7 @@ fun DashboardScreen(
     LaunchedEffect(Lifecycle.State.STARTED) {
         val inputStream = context.resources.openRawResource(R.raw.data)
         dashboardViewModel.getUsers(inputStream)
+        dashboardViewModel.getUserTodos()
     }
 
     Scaffold(

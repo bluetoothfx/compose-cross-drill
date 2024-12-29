@@ -1,4 +1,8 @@
 package com.blueprint.composecrossdrill.domain.repository
 
-class LoginRepository {
+import com.blueprint.composecrossdrill.domain.model.todo.TodoData
+
+interface LoginRepository {
+    fun login()
+    suspend fun getTodos() : TodoData
 }
