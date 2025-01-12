@@ -1,8 +1,6 @@
 package com.blueprint.composecrossdrill.ui.features.details.screens
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
@@ -18,6 +16,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Star
+import androidx.compose.material3.AssistChip
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -65,7 +64,7 @@ fun DetailsScreen(navController: NavController, recipe: Recipe) {
                 model = recipe.image,
                 contentDescription = "Recipe Image",
                 modifier = Modifier
-                    .padding(8.dp)
+                    .padding(16.dp)
                     .clickable(onClick = {})
                     .align(Alignment.CenterHorizontally)
                     .height(150.dp)
@@ -163,28 +162,14 @@ fun DetailsScreen(navController: NavController, recipe: Recipe) {
                     .fillMaxWidth(),
             ) {
                 recipe.tags.forEach { tag ->
-                    Chip(tag)
+                    AssistChip(
+                        label = { Text(tag) },
+                        onClick = {},
+                        modifier = Modifier.padding(end = 8.dp)
+                    )
                 }
             }
         }
 
-    }
-}
-
-@Composable
-fun Chip(text: String) {
-    Box(
-        modifier = Modifier
-            .background(
-                color = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f),
-                shape = RoundedCornerShape(16.dp)
-            )
-            .padding(horizontal = 12.dp, vertical = 4.dp)
-    ) {
-        Text(
-            text = text,
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.primary
-        )
     }
 }
