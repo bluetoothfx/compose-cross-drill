@@ -1,5 +1,6 @@
 package com.blueprint.composecrossdrill.di
 
+import com.blueprint.composecrossdrill.domain.service.DashboardService
 import com.blueprint.composecrossdrill.domain.service.LoginService
 import okhttp3.OkHttpClient
 import org.koin.dsl.module
@@ -17,10 +18,8 @@ fun provideHttpClient(): OkHttpClient {
         .build()
 }
 
-
 fun provideConverterFactory(): GsonConverterFactory =
     GsonConverterFactory.create()
-
 
 fun provideRetrofit(
     okHttpClient: OkHttpClient,
@@ -36,10 +35,13 @@ fun provideRetrofit(
 fun provideService(retrofit: Retrofit): LoginService =
     retrofit.create(LoginService::class.java)
 
+fun provideDashboardService(retrofit: Retrofit): DashboardService =
+    retrofit.create(DashboardService::class.java)
 
 val networkModule = module {
     single { provideHttpClient() }
     single { provideConverterFactory() }
     single { provideRetrofit(get(),get()) }
     single { provideService(get()) }
+    single { provideDashboardService(get()) }
 }
