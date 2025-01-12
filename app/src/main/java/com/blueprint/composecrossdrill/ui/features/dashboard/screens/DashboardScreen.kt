@@ -16,13 +16,16 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.Lifecycle
+import androidx.navigation.NavController
+import com.blueprint.composecrossdrill.navigation.NavRoute
 import com.blueprint.composecrossdrill.ui.features.dashboard.viewmodel.DashboardViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DashboardScreen(
-    dashboardViewModel: DashboardViewModel = koinViewModel()
+    dashboardViewModel: DashboardViewModel = koinViewModel(),
+    navController: NavController
 ) {
     val recipes by dashboardViewModel.recipes
 
@@ -42,7 +45,9 @@ fun DashboardScreen(
         Column(Modifier.padding(innerPadding)) {
             LazyColumn {
                 items(recipes.size) { pos ->
-                    RecipeCard(recipes[pos])
+                    RecipeCard(recipes[pos], onItemClick = {
+                        navController.navigate(NavRoute.DETAILS.name)
+                    })
                 }
             }
         }

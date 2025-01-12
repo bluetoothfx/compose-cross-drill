@@ -33,13 +33,16 @@ import com.bumptech.glide.integration.compose.placeholder
 
 @OptIn(ExperimentalLayoutApi::class, ExperimentalGlideComposeApi::class)
 @Composable
-fun RecipeCard(recipes: Recipes) {
+fun RecipeCard(recipes: Recipes, onItemClick: () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp)
             .clickable { },
-        shape = RoundedCornerShape(16.dp)
+        shape = RoundedCornerShape(16.dp),
+        onClick = {
+            onItemClick.invoke()
+        }
     ) {
         Column {
             GlideImage(

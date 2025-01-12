@@ -12,14 +12,17 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavController
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DetailsScreen() {
+fun DetailsScreen(navController: NavController) {
     Scaffold(
         topBar = {
             TopAppBar(title = { Text("Details") }, navigationIcon = {
-                IconButton(onClick = { }) {
+                IconButton(onClick = {
+                    navController.popBackStack()
+                }) {
                     Icon(Icons.Default.ArrowBack, contentDescription = "Menu")
                 }
             })

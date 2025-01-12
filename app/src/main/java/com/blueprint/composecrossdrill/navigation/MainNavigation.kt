@@ -18,10 +18,10 @@ fun MainNavigation() {
 
     NavHost(mainNavController, startDestination = NavRoute.HOME.name) {
         composable(NavRoute.HOME.name){
-            DashboardScreen()
+            DashboardScreen(navController = mainNavController)
         }
         composable(NavRoute.DETAILS.name){
-            DetailsScreen()
+            DetailsScreen(navController = mainNavController)
         }
     }
 }
