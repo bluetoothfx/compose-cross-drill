@@ -44,18 +44,16 @@ import com.blueprint.composecrossdrill.ui.features.dashboard.viewmodel.MyViewMod
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.bumptech.glide.integration.compose.placeholder
+import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalGlideComposeApi::class)
 @Composable
 fun DashboardScreen(
-    dashboardViewModel: DashboardViewModel = viewModel(
-        factory = MyViewModelFactory(
-            DashboardRepositoryImpl()
-        )
-    )
+    dashboardViewModel: DashboardViewModel = koinViewModel()
 ) {
     val context = LocalContext.current
     val users by dashboardViewModel.users
+    val recipes by dashboardViewModel.recipes
     var photoUri: Uri? by remember { mutableStateOf(null) }
     val launcher =
         rememberLauncherForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
@@ -65,7 +63,7 @@ fun DashboardScreen(
     LaunchedEffect(Lifecycle.State.STARTED) {
         val inputStream = context.resources.openRawResource(R.raw.data)
         dashboardViewModel.getUsers(inputStream)
-        dashboardViewModel.getUserTodos()
+        dashboardViewModel.getRecipes()
     }
 
     Scaffold(
