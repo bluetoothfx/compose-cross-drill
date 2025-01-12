@@ -1,9 +1,11 @@
-package com.blueprint.composecrossdrill.domain.model.receipies
+package com.blueprint.composecrossdrill.domain.model.recipes
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
-
-data class Recipes(
+@Parcelize
+data class Recipe(
     @SerializedName("id") var id: Int? = null,
     @SerializedName("name") var name: String? = null,
     @SerializedName("ingredients") var ingredients: ArrayList<String> = arrayListOf(),
@@ -21,4 +23,4 @@ data class Recipes(
     @SerializedName("reviewCount") var reviewCount: Int? = null,
     @SerializedName("mealType") var mealType: ArrayList<String> = arrayListOf()
 
-)
+) : Parcelable

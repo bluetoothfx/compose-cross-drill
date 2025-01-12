@@ -26,14 +26,14 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.blueprint.composecrossdrill.R
-import com.blueprint.composecrossdrill.domain.model.receipies.Recipes
+import com.blueprint.composecrossdrill.domain.model.recipes.Recipe
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.bumptech.glide.integration.compose.placeholder
 
 @OptIn(ExperimentalLayoutApi::class, ExperimentalGlideComposeApi::class)
 @Composable
-fun RecipeCard(recipes: Recipes, onItemClick: () -> Unit) {
+fun RecipeCard(recipe: Recipe, onItemClick: (recipe: Recipe) -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -41,12 +41,12 @@ fun RecipeCard(recipes: Recipes, onItemClick: () -> Unit) {
             .clickable { },
         shape = RoundedCornerShape(16.dp),
         onClick = {
-            onItemClick.invoke()
+            onItemClick(recipe)
         }
     ) {
         Column {
             GlideImage(
-                model = recipes.image,
+                model = recipe.image,
                 contentDescription = "Recipe Image",
                 modifier = Modifier
                     .padding(8.dp)
@@ -61,7 +61,7 @@ fun RecipeCard(recipes: Recipes, onItemClick: () -> Unit) {
 
             Column(modifier = Modifier.padding(16.dp)) {
                 Text(
-                    text = recipes.name ?: "",
+                    text = recipe.name ?: "",
                     style = MaterialTheme.typography.bodyMedium,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
@@ -76,7 +76,7 @@ fun RecipeCard(recipes: Recipes, onItemClick: () -> Unit) {
                         tint = Color(0xFFFFD700) // Gold color
                     )
                     Text(
-                        text = "${recipes.rating} (${recipes.reviewCount} reviews)",
+                        text = "${recipe.rating} (${recipe.reviewCount} reviews)",
                         style = MaterialTheme.typography.bodySmall,
                         modifier = Modifier.padding(start = 4.dp)
                     )
@@ -85,21 +85,21 @@ fun RecipeCard(recipes: Recipes, onItemClick: () -> Unit) {
                 Spacer(modifier = Modifier.height(8.dp))
 
                 Text(
-                    text = "Prep: ${recipes.prepTimeMinutes} mins | Cook: ${recipes.cookTimeMinutes} mins",
+                    text = "Prep: ${recipe.prepTimeMinutes} mins | Cook: ${recipe.cookTimeMinutes} mins",
                     style = MaterialTheme.typography.bodyMedium
                 )
 
                 Spacer(modifier = Modifier.height(8.dp))
 
                 Text(
-                    text = "Servings: ${recipes.servings}",
+                    text = "Servings: ${recipe.servings}",
                     style = MaterialTheme.typography.bodyMedium
                 )
 
                 Spacer(modifier = Modifier.height(8.dp))
 
                 FlowRow {
-                    recipes.tags.forEach { tag ->
+                    recipe.tags.forEach { tag ->
                         AssistChip(
                             label = { Text(tag) },
                             onClick = {},

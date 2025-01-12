@@ -4,7 +4,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import com.blueprint.composecrossdrill.domain.model.User
-import com.blueprint.composecrossdrill.domain.model.receipies.Recipes
+import com.blueprint.composecrossdrill.domain.model.recipes.Recipe
 import com.blueprint.composecrossdrill.domain.model.todo.TodoData
 import com.blueprint.composecrossdrill.domain.repository.DashboardRepository
 import com.blueprint.composecrossdrill.domain.repository.LoginRepository
@@ -21,8 +21,8 @@ class DashboardViewModel(private val dashboardRepository: DashboardRepository) :
     private val _userTodos = mutableStateOf(TodoData())
     val userTodos: State<TodoData> = _userTodos
 
-    private val _recipes = mutableStateOf<List<Recipes>>(emptyList())
-    val recipes: State<List<Recipes>> = _recipes
+    private val _recipe = mutableStateOf<List<Recipe>>(emptyList())
+    val recipe: State<List<Recipe>> = _recipe
 
     private val loginRepository: LoginRepository by inject()
 
@@ -35,6 +35,6 @@ class DashboardViewModel(private val dashboardRepository: DashboardRepository) :
     }
 
     suspend fun getRecipes() {
-        _recipes.value = dashboardRepository.getRecipes()
+        _recipe.value = dashboardRepository.getRecipes()
     }
 }

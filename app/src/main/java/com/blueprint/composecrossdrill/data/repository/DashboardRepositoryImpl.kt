@@ -1,7 +1,7 @@
 package com.blueprint.composecrossdrill.data.repository
 
 import com.blueprint.composecrossdrill.domain.model.User
-import com.blueprint.composecrossdrill.domain.model.receipies.Recipes
+import com.blueprint.composecrossdrill.domain.model.recipes.Recipe
 import com.blueprint.composecrossdrill.domain.repository.DashboardRepository
 import com.blueprint.composecrossdrill.domain.service.DashboardService
 import com.google.gson.Gson
@@ -16,9 +16,9 @@ class DashboardRepositoryImpl(private val dashboardService: DashboardService) : 
         return gson.fromJson(jsonString, userListType)
     }
 
-    override suspend fun getRecipes(): List<Recipes> {
+    override suspend fun getRecipes(): List<Recipe> {
         return dashboardService.getRecipes().let {
-            it.body()?.recipes as List<Recipes>
+            it.body()?.recipes as List<Recipe>
         }
     }
 }

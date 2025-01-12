@@ -27,7 +27,7 @@ fun DashboardScreen(
     dashboardViewModel: DashboardViewModel = koinViewModel(),
     navController: NavController
 ) {
-    val recipes by dashboardViewModel.recipes
+    val recipes by dashboardViewModel.recipe
 
     LaunchedEffect(Lifecycle.State.STARTED) {
         dashboardViewModel.getRecipes()
@@ -35,7 +35,7 @@ fun DashboardScreen(
 
     Scaffold(
         topBar = {
-            TopAppBar(title = { Text("Dashboard") }, navigationIcon = {
+            TopAppBar(title = { Text("Home") }, navigationIcon = {
                 IconButton(onClick = { }) {
                     Icon(Icons.Default.Menu, contentDescription = "Menu")
                 }
@@ -45,7 +45,8 @@ fun DashboardScreen(
         Column(Modifier.padding(innerPadding)) {
             LazyColumn {
                 items(recipes.size) { pos ->
-                    RecipeCard(recipes[pos], onItemClick = {
+                    RecipeCard(recipes[pos], onItemClick = { recipe ->
+                        navController.currentBackStackEntry?.savedStateHandle?.set("recipe", recipe)
                         navController.navigate(NavRoute.DETAILS.name)
                     })
                 }
