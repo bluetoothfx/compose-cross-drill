@@ -23,15 +23,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import coil3.compose.AsyncImage
 import com.blueprint.composecrossdrill.R
 import com.blueprint.composecrossdrill.domain.model.recipes.Recipe
-import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
-import com.bumptech.glide.integration.compose.GlideImage
-import com.bumptech.glide.integration.compose.placeholder
 
-@OptIn(ExperimentalLayoutApi::class, ExperimentalGlideComposeApi::class)
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun RecipeCard(recipe: Recipe, onItemClick: (recipe: Recipe) -> Unit) {
     Card(
@@ -45,18 +44,19 @@ fun RecipeCard(recipe: Recipe, onItemClick: (recipe: Recipe) -> Unit) {
         }
     ) {
         Column {
-            GlideImage(
+            AsyncImage(
                 model = recipe.image,
                 contentDescription = "Recipe Image",
                 modifier = Modifier
                     .padding(8.dp)
-                    .clickable(onClick = {})
                     .align(Alignment.CenterHorizontally)
                     .height(150.dp)
                     .clip(shape = RoundedCornerShape(16.dp)),
-                loading = placeholder(R.drawable.ic_loading),
-                failure = placeholder(R.drawable.ic_error),
+                placeholder = painterResource(R.drawable.ic_loading),
+                error = painterResource(R.drawable.ic_error),
                 contentScale = ContentScale.Crop,
+                onSuccess = { /* Handle success */ },
+                onLoading = { /* Show loading spinner */ },
             )
 
             Column(modifier = Modifier.padding(16.dp)) {

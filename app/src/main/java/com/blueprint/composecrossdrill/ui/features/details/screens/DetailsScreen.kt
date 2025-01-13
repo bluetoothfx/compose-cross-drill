@@ -1,6 +1,5 @@
 package com.blueprint.composecrossdrill.ui.features.details.screens
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
@@ -30,16 +29,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import coil3.compose.AsyncImage
 import com.blueprint.composecrossdrill.R
 import com.blueprint.composecrossdrill.domain.model.recipes.Recipe
-import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
-import com.bumptech.glide.integration.compose.GlideImage
-import com.bumptech.glide.integration.compose.placeholder
 
 @OptIn(
-    ExperimentalMaterial3Api::class, ExperimentalGlideComposeApi::class,
+    ExperimentalMaterial3Api::class,
     ExperimentalLayoutApi::class
 )
 @Composable
@@ -60,18 +58,19 @@ fun DetailsScreen(navController: NavController, recipe: Recipe) {
                 .padding(innerPadding)
                 .verticalScroll(rememberScrollState())
         ) {
-            GlideImage(
+            AsyncImage(
                 model = recipe.image,
                 contentDescription = "Recipe Image",
                 modifier = Modifier
-                    .padding(16.dp)
-                    .clickable(onClick = {})
+                    .padding(8.dp)
                     .align(Alignment.CenterHorizontally)
-                    .height(150.dp)
+                    .height(180.dp)
                     .clip(shape = RoundedCornerShape(16.dp)),
-                loading = placeholder(R.drawable.ic_loading),
-                failure = placeholder(R.drawable.ic_error),
+                placeholder = painterResource(R.drawable.ic_loading),
+                error = painterResource(R.drawable.ic_error),
                 contentScale = ContentScale.Crop,
+                onSuccess = { /* Handle success */ },
+                onLoading = { /* Show loading spinner */ },
             )
 
             Spacer(modifier = Modifier.height(16.dp))

@@ -52,7 +52,8 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.gson)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
-    implementation(libs.compose)
+
+    //Image loading dependencies
     implementation(libs.coil.compose)
     implementation(libs.coil.network.okhttp)
 
