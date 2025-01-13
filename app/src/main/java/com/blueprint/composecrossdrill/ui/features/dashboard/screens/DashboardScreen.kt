@@ -32,11 +32,13 @@ fun DashboardScreen(
     dashboardViewModel: DashboardViewModel = koinViewModel(),
     navController: NavController
 ) {
-    val recipes by dashboardViewModel.recipe
+    val recipes by dashboardViewModel.recipe.collectAsState()
     val isLoading by dashboardViewModel.isLoading.collectAsState()
 
-    LaunchedEffect(Lifecycle.State.STARTED) {
-        dashboardViewModel.getRecipes()
+    LaunchedEffect(Lifecycle.State.CREATED) {
+        if (recipes.isEmpty()){
+            dashboardViewModel.getRecipes()
+        }
     }
 
     Scaffold(

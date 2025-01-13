@@ -62,7 +62,7 @@ fun DetailsScreen(navController: NavController, recipe: Recipe) {
                 model = recipe.image,
                 contentDescription = "Recipe Image",
                 modifier = Modifier
-                    .padding(8.dp)
+                    .padding(16.dp)
                     .align(Alignment.CenterHorizontally)
                     .height(180.dp)
                     .clip(shape = RoundedCornerShape(16.dp)),
