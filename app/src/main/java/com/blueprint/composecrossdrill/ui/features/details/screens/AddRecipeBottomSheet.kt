@@ -5,7 +5,6 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -17,14 +16,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.KeyboardArrowDown
-import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.Button
-import androidx.compose.material3.DropdownMenu
-import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.SheetState
 import androidx.compose.material3.Text
@@ -40,7 +33,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import coil3.compose.rememberAsyncImagePainter
@@ -52,14 +44,8 @@ fun AddRecipeBottomSheet(sheetState: SheetState, onDismissRequest: () -> Unit) {
     var name by remember { mutableStateOf("") }
     var cookTime by remember { mutableStateOf("") }
     var prepTime by remember { mutableStateOf("") }
-    var mExpanded by remember { mutableStateOf(false) }
-
     val cuisines = listOf("Indian", "Thai", "Italian", "Chinese")
-    var mSelectedText by remember { mutableStateOf("") }
-    val icon = if (mExpanded)
-        Icons.Filled.KeyboardArrowUp
-    else
-        Icons.Filled.KeyboardArrowDown
+    val mealType = listOf("Dinner", "Lunch", "Snack", "Dessert", "Breakfast")
 
     val context = LocalContext.current
 
@@ -132,39 +118,14 @@ fun AddRecipeBottomSheet(sheetState: SheetState, onDismissRequest: () -> Unit) {
                     ),
                 )
             }
-            TextField(
-                textStyle = TextStyle(color = MaterialTheme.colorScheme.onSurface),
-                value = mSelectedText,
-                onValueChange = { mSelectedText = it },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clickable {
-                        mExpanded = !mExpanded
-                    }
-                    .clip(shape = RoundedCornerShape(16.dp)),
-                colors = TextFieldDefaults.colors(
-                    focusedIndicatorColor = Color.Transparent,
-                    unfocusedIndicatorColor = Color.Transparent,
-                    disabledIndicatorColor = Color.Transparent
-                ),
-                enabled = false,
-                trailingIcon = {
-                    Image(icon, "contentDescription",
-                        Modifier.clickable { mExpanded = !mExpanded })
-                }
-            )
-            DropdownMenu(
-                expanded = mExpanded,
-                onDismissRequest = { mExpanded = false },
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                cuisines.forEach { label ->
-                    DropdownMenuItem(onClick = {
-                        mSelectedText = label
-                        mExpanded = false
-                    }, text = { Text(text = label) })
-                }
-            }
+            ExtendedDropDown(
+                list = cuisines,
+                defaultValue = "Select Cuisine",
+                onItemSelected = { selectedItem -> })
+            ExtendedDropDown(
+                list = mealType,
+                defaultValue = "Select Meal Type",
+                onItemSelected = { selectedItem -> })
             Button(
                 modifier = Modifier
                     .padding(vertical = 8.dp, horizontal = 8.dp)
