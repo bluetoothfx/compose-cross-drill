@@ -23,7 +23,13 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -42,6 +48,10 @@ import com.blueprint.composecrossdrill.domain.model.recipes.Recipe
 )
 @Composable
 fun DetailsScreen(navController: NavController, recipe: Recipe) {
+    val sheetState = rememberModalBottomSheetState()
+    val scope = rememberCoroutineScope()
+    var showBottomSheet by remember { mutableStateOf(false) }
+
     Scaffold(
         topBar = {
             TopAppBar(title = { Text("Details") }, navigationIcon = {
@@ -54,10 +64,20 @@ fun DetailsScreen(navController: NavController, recipe: Recipe) {
         },
         bottomBar = {
             RecipeBottomActions(
-                onAddRecipeClick = {},
+                onAddRecipeClick = {
+                    showBottomSheet = true
+                },
                 onFavouriteClick = {})
         }
     ) { innerPadding ->
+        //Bottom Sheet
+        if (showBottomSheet) {
+            AddRecipeBottomSheet(sheetState, onDismissRequest = {
+                showBottomSheet = false
+            })
+        }
+
+        //Main Content
         Column(
             modifier = Modifier
                 .padding(innerPadding)

@@ -36,7 +36,8 @@ fun RecipeBottomActions(
         Button(
             onClick = onAddRecipeClick,
             modifier = Modifier
-                .weight(5f)
+                .weight(.8f)
+                .fillMaxWidth(.8f)
                 .height(48.dp)
         ) {
             Text("Add Recipe")
@@ -45,7 +46,7 @@ fun RecipeBottomActions(
         IconButton(
             onClick = onFavouriteClick,
             modifier = Modifier
-                .weight(1f)
+                .weight(.2f)
                 .clip(RoundedCornerShape(24.dp))
                 .background(MaterialTheme.colorScheme.primary),
         ) {
