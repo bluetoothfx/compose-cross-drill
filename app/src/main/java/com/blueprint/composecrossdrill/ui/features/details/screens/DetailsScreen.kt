@@ -51,6 +51,11 @@ fun DetailsScreen(navController: NavController, recipe: Recipe) {
                     Icon(Icons.Default.ArrowBack, contentDescription = "Menu")
                 }
             })
+        },
+        bottomBar = {
+            RecipeBottomActions(
+                onAddRecipeClick = {},
+                onFavouriteClick = {})
         }
     ) { innerPadding ->
         Column(
