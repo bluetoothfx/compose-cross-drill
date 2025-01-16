@@ -6,6 +6,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.blueprint.composecrossdrill.domain.model.recipes.Recipe
 import com.blueprint.composecrossdrill.ui.features.dashboard.screens.DashboardScreen
+import com.blueprint.composecrossdrill.ui.features.dashboard.simplerecipe.SimpleRecipeHome
 import com.blueprint.composecrossdrill.ui.features.details.screens.DetailsScreen
 import com.blueprint.composecrossdrill.utils.ScaleTransitionDirection
 import com.blueprint.composecrossdrill.utils.scaleIntoContainer
@@ -13,7 +14,8 @@ import com.blueprint.composecrossdrill.utils.scaleOutOfContainer
 
 enum class NavRoute {
     HOME,
-    DETAILS
+    DETAILS,
+    SIMPLE_RECIPE_HOME
 }
 
 @Composable
@@ -25,6 +27,11 @@ fun MainNavigation() {
             route = NavRoute.HOME.name,
         ) {
             DashboardScreen(navController = mainNavController)
+        }
+        composable(
+            route = NavRoute.SIMPLE_RECIPE_HOME.name,
+        ) {
+            SimpleRecipeHome(navController = mainNavController)
         }
         composable(
             route = NavRoute.DETAILS.name,

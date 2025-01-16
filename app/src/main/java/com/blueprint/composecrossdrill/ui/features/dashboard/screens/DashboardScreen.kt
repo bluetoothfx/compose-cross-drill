@@ -83,9 +83,11 @@ fun DashboardScreen(
                         style = MaterialTheme.typography.titleMedium
                     )
                     NavigationDrawerItem(
-                        label = { Text("Item 1") },
+                        label = { Text("Simple Recipe") },
                         selected = false,
-                        onClick = { /* Handle click */ }
+                        onClick = {
+                            navController.navigate(NavRoute.SIMPLE_RECIPE_HOME.name)
+                        }
                     )
                     NavigationDrawerItem(
                         label = { Text("Item 2") },
