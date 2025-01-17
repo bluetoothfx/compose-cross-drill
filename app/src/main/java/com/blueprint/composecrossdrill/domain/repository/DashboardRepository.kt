@@ -1,10 +1,11 @@
 package com.blueprint.composecrossdrill.domain.repository
 
-import com.blueprint.composecrossdrill.domain.model.User
 import com.blueprint.composecrossdrill.domain.model.recipes.Recipe
-import java.io.InputStream
+import com.blueprint.composecrossdrill.domain.model.recipes.RecipeUser
+import com.blueprint.composecrossdrill.domain.model.user.User
 
 interface DashboardRepository {
-    suspend fun getUsers(inputStream: InputStream): List<User>
+    suspend fun getUsers(): List<User>
     suspend fun getRecipes(): List<Recipe>
+    suspend fun getRecipesByUser(): List<RecipeUser>
 }

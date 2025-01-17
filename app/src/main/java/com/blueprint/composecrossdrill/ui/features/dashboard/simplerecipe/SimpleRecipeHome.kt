@@ -44,7 +44,7 @@ import androidx.navigation.NavController
 import coil3.compose.AsyncImage
 import com.blueprint.composecrossdrill.R
 import com.blueprint.composecrossdrill.domain.model.category.RecipeCategory
-import com.blueprint.composecrossdrill.domain.model.recipes.Recipe
+import com.blueprint.composecrossdrill.domain.model.recipes.RecipeUser
 import com.blueprint.composecrossdrill.ui.features.dashboard.viewmodel.DashboardViewModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -181,13 +181,12 @@ fun SimpleSectionTemplate(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun SimpleRecipeItemList(recipes: List<Recipe> = emptyList()) {
+fun SimpleRecipeItemList(recipes: List<RecipeUser> = emptyList()) {
     if (recipes.isNotEmpty()) {
         LazyRow {
             items(recipes.size, itemContent = { index ->
                 val currentRecipe = recipes[index]
-                //PizzaCard()
-                SimpleRecipeItemInfoTemplate(recipe = currentRecipe)
+                SimpleRecipeItemInfoTemplate(recipeUser = currentRecipe)
             })
         }
     }
@@ -195,7 +194,7 @@ fun SimpleRecipeItemList(recipes: List<Recipe> = emptyList()) {
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun SimpleRecipeItemInfoTemplate(recipe: Recipe) {
+fun SimpleRecipeItemInfoTemplate(recipeUser: RecipeUser) {
     Column(
         Modifier
             .padding(top = 16.dp, end = 12.dp)
@@ -205,14 +204,14 @@ fun SimpleRecipeItemInfoTemplate(recipe: Recipe) {
                 modifier = Modifier
                     .size(120.dp)
                     .clip(RoundedCornerShape(8.dp)),
-                model = recipe.image,
+                model = recipeUser.recipe.image,
                 contentDescription = "user_image",
                 placeholder = painterResource(R.drawable.ic_loading),
             )
         }
         Row(Modifier.wrapContentWidth()) {
             Text(
-                recipe.name.toString(),
+                recipeUser.recipe.name.toString(),
                 modifier = Modifier.width(120.dp),
                 fontSize = 12.sp,
                 fontWeight = androidx.compose.ui.text.font.FontWeight.Bold,
@@ -246,7 +245,7 @@ fun SimpleRecipeItemInfoTemplate(recipe: Recipe) {
                 )
                 Spacer(modifier = Modifier.width(4.dp))
                 Text(
-                    "Gordon Ramsay",
+                    recipeUser.user.firstName.toString(),
                     fontSize = 12.sp,
                     lineHeight = 20.sp,
                     textDecoration = TextDecoration.Underline
@@ -263,11 +262,11 @@ fun SimpleRecipeHome(
     navController: NavController
 ) {
     val dashboardViewModel = koinViewModel<DashboardViewModel>()
-    val recipes by dashboardViewModel.recipe.collectAsState()
+    val recipeUser by dashboardViewModel.recipeUser.collectAsState()
 
     LaunchedEffect(Lifecycle.State.CREATED) {
-        if (recipes.isEmpty()) {
-            dashboardViewModel.getRecipes()
+        if (recipeUser.isEmpty()) {
+            dashboardViewModel.getRecipeUser()
         }
     }
 
@@ -275,7 +274,7 @@ fun SimpleRecipeHome(
         TopAppBar()
         CategoryMenu()
         SimpleSectionTemplate()
-        SimpleRecipeItemList(recipes = recipes)
+        SimpleRecipeItemList(recipes = recipeUser)
 
         /*if (false) {
             Box(

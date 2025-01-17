@@ -21,6 +21,5 @@ data class Recipe(
     @SerializedName("image") var image: String? = null,
     @SerializedName("rating") var rating: Double? = null,
     @SerializedName("reviewCount") var reviewCount: Int? = null,
-    @SerializedName("mealType") var mealType: ArrayList<String> = arrayListOf()
-
+    @SerializedName("mealType") var mealType: ArrayList<String> = arrayListOf(),
 ) : Parcelable
