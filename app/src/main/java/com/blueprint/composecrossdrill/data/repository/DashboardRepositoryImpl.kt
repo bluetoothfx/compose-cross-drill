@@ -24,7 +24,7 @@ class DashboardRepositoryImpl(private val dashboardService: DashboardService) :
         val users = getUsers()
         val recipes = getRecipes()
         val userMap = users.associateBy { it.id }
-        val defaultUser = User(id = 0, firstName = "System User") // Define your default system user
+        val defaultUser = User(id = 0, firstName = "System User")
 
         return recipes.map { recipe ->
             val user = userMap[recipe.userId] ?: defaultUser
