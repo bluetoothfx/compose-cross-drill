@@ -32,7 +32,11 @@ import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AddRecipeBottomSheet(sheetState: SheetState, onDismissRequest: () -> Unit) {
+fun AddRecipeBottomSheet(
+    sheetState: SheetState,
+    onDismissRequest: () -> Unit,
+    onRecipeSubmitRequest: () -> Unit
+) {
     var title by remember { mutableStateOf("") }
     var instructions by remember { mutableStateOf("") }
     var cookTime by remember { mutableStateOf("") }
@@ -136,7 +140,7 @@ fun AddRecipeBottomSheet(sheetState: SheetState, onDismissRequest: () -> Unit) {
                     .height(48.dp)
                     .align(Alignment.CenterHorizontally),
                 onClick = {
-
+                    onRecipeSubmitRequest()
                 }
             ) {
                 Text("Submit Recipe")

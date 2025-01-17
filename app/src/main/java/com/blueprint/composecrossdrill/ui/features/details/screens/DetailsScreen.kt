@@ -1,21 +1,29 @@
 package com.blueprint.composecrossdrill.ui.features.details.screens
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.AssistChip
+import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -35,7 +43,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Dialog
 import androidx.navigation.NavController
 import coil3.compose.AsyncImage
 import com.blueprint.composecrossdrill.R
@@ -51,6 +61,7 @@ fun DetailsScreen(navController: NavController, recipe: Recipe) {
         skipPartiallyExpanded = true
     )
     var showBottomSheet by remember { mutableStateOf(false) }
+    var shouldShowDialog by remember { mutableStateOf(false) }
 
     Scaffold(
         topBar = {
@@ -74,6 +85,16 @@ fun DetailsScreen(navController: NavController, recipe: Recipe) {
         if (showBottomSheet) {
             AddRecipeBottomSheet(sheetState, onDismissRequest = {
                 showBottomSheet = false
+            }, onRecipeSubmitRequest = {
+                showBottomSheet = false
+                shouldShowDialog = true
+            })
+        }
+
+        //Recipe Submission Success Dialog
+        if (shouldShowDialog) {
+            ShowRecipeSubmissionSuccessDialog(onDismissRequest = {
+                shouldShowDialog = false
             })
         }
 
@@ -195,5 +216,36 @@ fun DetailsScreen(navController: NavController, recipe: Recipe) {
             }
         }
 
+    }
+}
+
+@Composable
+fun ShowRecipeSubmissionSuccessDialog(onDismissRequest: () -> Unit) {
+    Dialog(onDismissRequest = {
+        onDismissRequest()
+    }) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(200.dp)
+                .padding(32.dp)
+                .clip(RoundedCornerShape(16.dp))
+                .background(MaterialTheme.colorScheme.onPrimary),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            Icon(
+                imageVector = Icons.Default.CheckCircle,
+                contentDescription = "Submitted",
+                modifier = Modifier.size(width = 48.dp, height = 48.dp)
+            )
+            Text(
+                text = "Your submission has been received.",
+                modifier = Modifier
+                    .wrapContentSize(Alignment.Center),
+                textAlign = TextAlign.Center,
+                style = MaterialTheme.typography.titleMedium,
+            )
+        }
     }
 }
