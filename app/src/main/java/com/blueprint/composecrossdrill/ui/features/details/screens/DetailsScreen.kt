@@ -28,7 +28,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -48,8 +47,9 @@ import com.blueprint.composecrossdrill.domain.model.recipes.Recipe
 )
 @Composable
 fun DetailsScreen(navController: NavController, recipe: Recipe) {
-    val sheetState = rememberModalBottomSheetState()
-    val scope = rememberCoroutineScope()
+    val sheetState = rememberModalBottomSheetState(
+        skipPartiallyExpanded = true
+    )
     var showBottomSheet by remember { mutableStateOf(false) }
 
     Scaffold(
