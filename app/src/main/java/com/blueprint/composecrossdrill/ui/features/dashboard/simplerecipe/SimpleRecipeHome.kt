@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
-import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -14,6 +13,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.CircleShape
@@ -35,6 +36,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.Lifecycle
@@ -42,6 +44,7 @@ import androidx.navigation.NavController
 import coil3.compose.AsyncImage
 import com.blueprint.composecrossdrill.R
 import com.blueprint.composecrossdrill.domain.model.category.RecipeCategory
+import com.blueprint.composecrossdrill.domain.model.recipes.Recipe
 import com.blueprint.composecrossdrill.ui.features.dashboard.viewmodel.DashboardViewModel
 import org.koin.androidx.compose.koinViewModel
 
@@ -170,31 +173,51 @@ private fun CategoryItemTemplate(
 
 
 @Composable
-fun SimpleSectionCard(modifier: Modifier = Modifier) {
+fun SimpleSectionTemplate(modifier: Modifier = Modifier) {
     Row(Modifier.padding(top = 16.dp)) {
         Column(Modifier.weight(1f)) { Text("Easy & Simple Recipe") }
         Column(Modifier.weight(1f), horizontalAlignment = Alignment.End) { Text("See More") }
     }
 }
 
+@Composable
+fun SimpleRecipeItemList(recipes: List<Recipe> = emptyList()) {
+    if (recipes.isNotEmpty()) {
+        LazyRow {
+            items(recipes.size, itemContent = { index ->
+                val currentRecipe = recipes[index]
+                //PizzaCard()
+                SimpleRecipeItemInfoTemplate(recipe = currentRecipe)
+            })
+        }
+    }
+}
+
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun SimpleRecipeItemInfo(modifier: Modifier = Modifier) {
-    Column(Modifier.padding(top = 16.dp)) {
+fun SimpleRecipeItemInfoTemplate(recipe: Recipe) {
+    Column(
+        Modifier
+            .padding(top = 16.dp, end = 12.dp)
+    ) {
         Row {
             AsyncImage(
                 modifier = Modifier
                     .size(120.dp)
                     .clip(RoundedCornerShape(8.dp)),
-                model = R.drawable.user_woman,
+                model = recipe.image,
                 contentDescription = "user_image",
+                placeholder = painterResource(R.drawable.ic_loading),
             )
         }
-        FlowRow {
+        Row(Modifier.wrapContentWidth()) {
             Text(
-                "Recipe Name",
+                recipe.name.toString(),
+                modifier = Modifier.width(120.dp),
                 fontSize = 12.sp,
-                fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
+                fontWeight = androidx.compose.ui.text.font.FontWeight.Bold,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
             )
         }
 
@@ -251,8 +274,8 @@ fun SimpleRecipeHome(
     Column(Modifier.padding(start = 16.dp, end = 16.dp, top = 40.dp)) {
         TopAppBar()
         CategoryMenu()
-        SimpleSectionCard()
-        SimpleRecipeItemInfo()
+        SimpleSectionTemplate()
+        SimpleRecipeItemList(recipes = recipes)
 
         /*if (false) {
             Box(
