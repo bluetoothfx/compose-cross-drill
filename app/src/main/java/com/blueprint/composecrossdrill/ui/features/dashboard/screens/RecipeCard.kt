@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -24,6 +23,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
@@ -48,7 +48,7 @@ fun RecipeCard(recipe: Recipe, onItemClick: (recipe: Recipe) -> Unit) {
                 model = recipe.image,
                 contentDescription = "Recipe Image",
                 modifier = Modifier
-                    .padding(8.dp)
+                    .padding(16.dp)
                     .align(Alignment.CenterHorizontally)
                     .height(150.dp)
                     .clip(shape = RoundedCornerShape(16.dp)),
@@ -59,15 +59,14 @@ fun RecipeCard(recipe: Recipe, onItemClick: (recipe: Recipe) -> Unit) {
                 onLoading = { /* Show loading spinner */ },
             )
 
-            Column(modifier = Modifier.padding(16.dp)) {
+            Column(modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 16.dp)) {
                 Text(
                     text = recipe.name ?: "",
                     style = MaterialTheme.typography.bodyMedium,
                     maxLines = 1,
+                    fontWeight = FontWeight.Bold,
                     overflow = TextOverflow.Ellipsis
                 )
-
-                Spacer(modifier = Modifier.height(8.dp))
 
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Icon(
@@ -82,21 +81,15 @@ fun RecipeCard(recipe: Recipe, onItemClick: (recipe: Recipe) -> Unit) {
                     )
                 }
 
-                Spacer(modifier = Modifier.height(8.dp))
-
                 Text(
                     text = "Prep: ${recipe.prepTimeMinutes} mins | Cook: ${recipe.cookTimeMinutes} mins",
                     style = MaterialTheme.typography.bodyMedium
                 )
 
-                Spacer(modifier = Modifier.height(8.dp))
-
                 Text(
                     text = "Servings: ${recipe.servings}",
                     style = MaterialTheme.typography.bodyMedium
                 )
-
-                Spacer(modifier = Modifier.height(8.dp))
 
                 FlowRow {
                     recipe.tags.forEach { tag ->

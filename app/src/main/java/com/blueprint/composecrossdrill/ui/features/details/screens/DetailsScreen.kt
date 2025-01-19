@@ -1,6 +1,5 @@
 package com.blueprint.composecrossdrill.ui.features.details.screens
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -8,7 +7,6 @@ import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -23,7 +21,6 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.AssistChip
-import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -43,6 +40,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
@@ -118,9 +116,12 @@ fun DetailsScreen(navController: NavController, recipe: Recipe) {
                 onSuccess = { /* Handle success */ },
                 onLoading = { /* Show loading spinner */ },
             )
-
-            Spacer(modifier = Modifier.height(16.dp))
-
+            Text(
+                text = recipe.name.orEmpty(),
+                style = MaterialTheme.typography.titleLarge,
+                modifier = Modifier.padding(horizontal = 16.dp),
+                fontWeight = FontWeight.Bold
+            )
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -139,9 +140,8 @@ fun DetailsScreen(navController: NavController, recipe: Recipe) {
                 )
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(8.dp))
 
-            // Prep and Cook Time
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -150,7 +150,7 @@ fun DetailsScreen(navController: NavController, recipe: Recipe) {
                 Text(
                     text = "Prep Time: ${recipe.prepTimeMinutes} mins",
                     style = MaterialTheme.typography.bodyMedium,
-                    modifier = Modifier.weight(1f)
+                    modifier = Modifier.weight(1f),
                 )
                 Text(
                     text = "Cook Time: ${recipe.cookTimeMinutes} mins",
@@ -159,13 +159,13 @@ fun DetailsScreen(navController: NavController, recipe: Recipe) {
                 )
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(8.dp))
 
-            // Ingredients
             Text(
                 text = "Ingredients",
-                style = MaterialTheme.typography.bodyMedium,
-                modifier = Modifier.padding(horizontal = 16.dp)
+                style = MaterialTheme.typography.bodyLarge,
+                modifier = Modifier.padding(horizontal = 16.dp),
+                fontWeight = FontWeight.Bold
             )
             Column(modifier = Modifier.padding(horizontal = 16.dp)) {
                 recipe.ingredients.forEach { ingredient ->
@@ -178,28 +178,28 @@ fun DetailsScreen(navController: NavController, recipe: Recipe) {
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Instructions
             Text(
                 text = "Instructions",
-                style = MaterialTheme.typography.bodyMedium,
-                modifier = Modifier.padding(horizontal = 16.dp)
+                style = MaterialTheme.typography.bodyLarge,
+                modifier = Modifier.padding(horizontal = 16.dp),
+                fontWeight = FontWeight.Bold
             )
             Column(modifier = Modifier.padding(horizontal = 16.dp)) {
                 recipe.instructions.forEachIndexed { index, instruction ->
                     Text(
                         text = "${index + 1}. $instruction",
-                        style = MaterialTheme.typography.bodySmall
+                        style = MaterialTheme.typography.bodyMedium
                     )
                 }
             }
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Tags
             Text(
                 text = "Tags",
-                style = MaterialTheme.typography.bodyMedium,
-                modifier = Modifier.padding(horizontal = 16.dp)
+                style = MaterialTheme.typography.bodyLarge,
+                modifier = Modifier.padding(horizontal = 16.dp),
+                fontWeight = FontWeight.Bold
             )
             FlowRow(
                 modifier = Modifier
