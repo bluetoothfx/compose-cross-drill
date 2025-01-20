@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Button
@@ -48,7 +47,7 @@ fun RecipeBottomActions(
             onClick = onFavouriteClick,
             modifier = Modifier
                 .weight(.2f)
-                .clip(RoundedCornerShape(24.dp))
+                .clip(MaterialTheme.shapes.large)
                 .background(MaterialTheme.colorScheme.primary),
         ) {
             Icon(

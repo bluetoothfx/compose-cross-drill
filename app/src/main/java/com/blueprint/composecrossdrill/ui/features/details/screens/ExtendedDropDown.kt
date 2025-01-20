@@ -3,7 +3,6 @@ package com.blueprint.composecrossdrill.ui.features.details.screens
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
@@ -22,7 +21,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.unit.dp
 
 @Composable
 fun ExtendedDropDown(
@@ -46,7 +44,7 @@ fun ExtendedDropDown(
             .clickable {
                 mExpanded = !mExpanded
             }
-            .clip(shape = RoundedCornerShape(16.dp)),
+            .clip(shape = MaterialTheme.shapes.medium),
         colors = TextFieldDefaults.colors(
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent,

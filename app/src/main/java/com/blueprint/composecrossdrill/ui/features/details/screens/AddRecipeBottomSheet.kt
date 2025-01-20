@@ -9,10 +9,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.SheetState
 import androidx.compose.material3.Text
@@ -63,7 +63,7 @@ fun AddRecipeBottomSheet(
                 singleLine = true,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .clip(shape = RoundedCornerShape(16.dp)),
+                    .clip(shape = MaterialTheme.shapes.medium),
                 colors = TextFieldDefaults.colors(
                     focusedIndicatorColor = Color.Transparent,
                     unfocusedIndicatorColor = Color.Transparent,
@@ -81,7 +81,7 @@ fun AddRecipeBottomSheet(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(200.dp)
-                    .clip(shape = RoundedCornerShape(16.dp)),
+                    .clip(shape = MaterialTheme.shapes.medium),
                 colors = TextFieldDefaults.colors(
                     focusedIndicatorColor = Color.Transparent,
                     unfocusedIndicatorColor = Color.Transparent,
@@ -100,7 +100,7 @@ fun AddRecipeBottomSheet(
                     modifier = Modifier
                         .fillMaxWidth()
                         .weight(.5f)
-                        .clip(shape = RoundedCornerShape(16.dp)),
+                        .clip(shape = MaterialTheme.shapes.medium),
                     colors = TextFieldDefaults.colors(
                         focusedIndicatorColor = Color.Transparent,
                         unfocusedIndicatorColor = Color.Transparent,
@@ -118,7 +118,7 @@ fun AddRecipeBottomSheet(
                     modifier = Modifier
                         .fillMaxWidth()
                         .weight(.5f)
-                        .clip(shape = RoundedCornerShape(16.dp)),
+                        .clip(shape = MaterialTheme.shapes.medium),
                     colors = TextFieldDefaults.colors(
                         focusedIndicatorColor = Color.Transparent,
                         unfocusedIndicatorColor = Color.Transparent,

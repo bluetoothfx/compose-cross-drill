@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.AssistChip
@@ -38,7 +37,7 @@ fun RecipeCard(recipe: Recipe, onItemClick: (recipe: Recipe) -> Unit) {
             .fillMaxWidth()
             .padding(top = 16.dp, start = 16.dp, end = 16.dp)
             .clickable { },
-        shape = RoundedCornerShape(16.dp),
+        shape = MaterialTheme.shapes.medium,
         onClick = {
             onItemClick(recipe)
         }
@@ -51,7 +50,7 @@ fun RecipeCard(recipe: Recipe, onItemClick: (recipe: Recipe) -> Unit) {
                     .padding(16.dp)
                     .align(Alignment.CenterHorizontally)
                     .height(150.dp)
-                    .clip(shape = RoundedCornerShape(16.dp)),
+                    .clip(shape = MaterialTheme.shapes.medium),
                 placeholder = painterResource(R.drawable.ic_loading),
                 error = painterResource(R.drawable.ic_error),
                 contentScale = ContentScale.Crop,

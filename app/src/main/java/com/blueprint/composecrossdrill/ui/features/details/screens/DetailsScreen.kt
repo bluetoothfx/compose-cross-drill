@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -109,7 +108,7 @@ fun DetailsScreen(navController: NavController, recipe: Recipe) {
                     .padding(16.dp)
                     .align(Alignment.CenterHorizontally)
                     .height(180.dp)
-                    .clip(shape = RoundedCornerShape(16.dp)),
+                    .clip(shape = MaterialTheme.shapes.medium),
                 placeholder = painterResource(R.drawable.ic_loading),
                 error = painterResource(R.drawable.ic_error),
                 contentScale = ContentScale.Crop,
@@ -229,7 +228,7 @@ fun ShowRecipeSubmissionSuccessDialog(onDismissRequest: () -> Unit) {
                 .fillMaxWidth()
                 .height(200.dp)
                 .padding(32.dp)
-                .clip(RoundedCornerShape(16.dp))
+                .clip(MaterialTheme.shapes.medium)
                 .background(MaterialTheme.colorScheme.onPrimary),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
