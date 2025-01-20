@@ -5,11 +5,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.AssistChip
@@ -24,11 +22,13 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.blueprint.composecrossdrill.R
 import com.blueprint.composecrossdrill.domain.model.recipes.Recipe
+import com.blueprint.composecrossdrill.ui.theme.spacing
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
@@ -36,9 +36,13 @@ fun RecipeCard(recipe: Recipe, onItemClick: (recipe: Recipe) -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(top = 16.dp, start = 16.dp, end = 16.dp)
+            .padding(
+                top = MaterialTheme.spacing.medium,
+                start = MaterialTheme.spacing.medium,
+                end = MaterialTheme.spacing.medium
+            )
             .clickable { },
-        shape = RoundedCornerShape(16.dp),
+        shape = MaterialTheme.shapes.medium,
         onClick = {
             onItemClick(recipe)
         }
@@ -48,10 +52,10 @@ fun RecipeCard(recipe: Recipe, onItemClick: (recipe: Recipe) -> Unit) {
                 model = recipe.image,
                 contentDescription = "Recipe Image",
                 modifier = Modifier
-                    .padding(8.dp)
+                    .padding(MaterialTheme.spacing.medium)
                     .align(Alignment.CenterHorizontally)
                     .height(150.dp)
-                    .clip(shape = RoundedCornerShape(16.dp)),
+                    .clip(shape = MaterialTheme.shapes.medium),
                 placeholder = painterResource(R.drawable.ic_loading),
                 error = painterResource(R.drawable.ic_error),
                 contentScale = ContentScale.Crop,
@@ -59,15 +63,20 @@ fun RecipeCard(recipe: Recipe, onItemClick: (recipe: Recipe) -> Unit) {
                 onLoading = { /* Show loading spinner */ },
             )
 
-            Column(modifier = Modifier.padding(16.dp)) {
+            Column(
+                modifier = Modifier.padding(
+                    start = MaterialTheme.spacing.medium,
+                    end = MaterialTheme.spacing.medium,
+                    bottom = MaterialTheme.spacing.medium
+                )
+            ) {
                 Text(
                     text = recipe.name ?: "",
                     style = MaterialTheme.typography.bodyMedium,
                     maxLines = 1,
+                    fontWeight = FontWeight.Bold,
                     overflow = TextOverflow.Ellipsis
                 )
-
-                Spacer(modifier = Modifier.height(8.dp))
 
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Icon(
@@ -82,21 +91,15 @@ fun RecipeCard(recipe: Recipe, onItemClick: (recipe: Recipe) -> Unit) {
                     )
                 }
 
-                Spacer(modifier = Modifier.height(8.dp))
-
                 Text(
                     text = "Prep: ${recipe.prepTimeMinutes} mins | Cook: ${recipe.cookTimeMinutes} mins",
                     style = MaterialTheme.typography.bodyMedium
                 )
 
-                Spacer(modifier = Modifier.height(8.dp))
-
                 Text(
                     text = "Servings: ${recipe.servings}",
                     style = MaterialTheme.typography.bodyMedium
                 )
-
-                Spacer(modifier = Modifier.height(8.dp))
 
                 FlowRow {
                     recipe.tags.forEach { tag ->
