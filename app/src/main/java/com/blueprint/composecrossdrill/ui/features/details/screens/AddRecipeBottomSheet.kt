@@ -29,6 +29,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import com.blueprint.composecrossdrill.ui.theme.spacing
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -52,8 +53,8 @@ fun AddRecipeBottomSheet(
             modifier = Modifier
                 .wrapContentHeight()
                 .fillMaxWidth()
-                .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+                .padding(MaterialTheme.spacing.medium),
+            verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.small)
         ) {
             TextField(
                 value = title,
@@ -107,7 +108,7 @@ fun AddRecipeBottomSheet(
                         disabledIndicatorColor = Color.Transparent
                     ),
                 )
-                Spacer(modifier = Modifier.width(8.dp))
+                Spacer(modifier = Modifier.width(MaterialTheme.spacing.small))
                 TextField(
                     value = prepTime,
                     onValueChange = { prepTime = it },

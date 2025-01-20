@@ -20,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.unit.dp
+import com.blueprint.composecrossdrill.ui.theme.spacing
 
 @Composable
 fun RecipeBottomActions(
@@ -30,7 +31,12 @@ fun RecipeBottomActions(
         modifier = Modifier
             .fillMaxWidth()
             .shadow(elevation = 1.dp)
-            .padding(start = 16.dp, end = 16.dp, top = 16.dp, bottom = 32.dp),
+            .padding(
+                start = MaterialTheme.spacing.medium,
+                end = MaterialTheme.spacing.medium,
+                top = MaterialTheme.spacing.medium,
+                bottom = 32.dp
+            ),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Button(
@@ -42,7 +48,7 @@ fun RecipeBottomActions(
         ) {
             Text("Add Recipe")
         }
-        Spacer(modifier = Modifier.width(8.dp))
+        Spacer(modifier = Modifier.width(MaterialTheme.spacing.small))
         IconButton(
             onClick = onFavouriteClick,
             modifier = Modifier

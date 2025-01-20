@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.blueprint.composecrossdrill.R
 import com.blueprint.composecrossdrill.domain.model.recipes.Recipe
+import com.blueprint.composecrossdrill.ui.theme.spacing
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
@@ -35,7 +36,11 @@ fun RecipeCard(recipe: Recipe, onItemClick: (recipe: Recipe) -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(top = 16.dp, start = 16.dp, end = 16.dp)
+            .padding(
+                top = MaterialTheme.spacing.medium,
+                start = MaterialTheme.spacing.medium,
+                end = MaterialTheme.spacing.medium
+            )
             .clickable { },
         shape = MaterialTheme.shapes.medium,
         onClick = {
@@ -47,7 +52,7 @@ fun RecipeCard(recipe: Recipe, onItemClick: (recipe: Recipe) -> Unit) {
                 model = recipe.image,
                 contentDescription = "Recipe Image",
                 modifier = Modifier
-                    .padding(16.dp)
+                    .padding(MaterialTheme.spacing.medium)
                     .align(Alignment.CenterHorizontally)
                     .height(150.dp)
                     .clip(shape = MaterialTheme.shapes.medium),
@@ -58,7 +63,13 @@ fun RecipeCard(recipe: Recipe, onItemClick: (recipe: Recipe) -> Unit) {
                 onLoading = { /* Show loading spinner */ },
             )
 
-            Column(modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 16.dp)) {
+            Column(
+                modifier = Modifier.padding(
+                    start = MaterialTheme.spacing.medium,
+                    end = MaterialTheme.spacing.medium,
+                    bottom = MaterialTheme.spacing.medium
+                )
+            ) {
                 Text(
                     text = recipe.name ?: "",
                     style = MaterialTheme.typography.bodyMedium,

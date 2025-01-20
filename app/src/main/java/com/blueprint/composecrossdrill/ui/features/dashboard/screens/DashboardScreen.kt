@@ -39,6 +39,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
 import com.blueprint.composecrossdrill.navigation.NavRoute
 import com.blueprint.composecrossdrill.ui.features.dashboard.viewmodel.DashboardViewModel
+import com.blueprint.composecrossdrill.ui.theme.spacing
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 
@@ -66,20 +67,20 @@ fun DashboardScreen(
             ModalDrawerSheet {
                 Column(
                     modifier = Modifier
-                        .padding(horizontal = 16.dp)
+                        .padding(horizontal = MaterialTheme.spacing.medium)
                         .verticalScroll(rememberScrollState())
                 ) {
                     Spacer(Modifier.height(12.dp))
                     Text(
                         "Compose Cross Drill",
-                        modifier = Modifier.padding(16.dp),
+                        modifier = Modifier.padding(MaterialTheme.spacing.medium),
                         style = MaterialTheme.typography.titleLarge
                     )
                     HorizontalDivider()
 
                     Text(
                         "Sample Menu",
-                        modifier = Modifier.padding(16.dp),
+                        modifier = Modifier.padding(MaterialTheme.spacing.medium),
                         style = MaterialTheme.typography.titleMedium
                     )
                     NavigationDrawerItem(
@@ -93,11 +94,11 @@ fun DashboardScreen(
                         onClick = { /* Handle click */ }
                     )
 
-                    HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
+                    HorizontalDivider(modifier = Modifier.padding(vertical = MaterialTheme.spacing.small))
 
                     Text(
                         "Contact & Support",
-                        modifier = Modifier.padding(16.dp),
+                        modifier = Modifier.padding(MaterialTheme.spacing.medium),
                         style = MaterialTheme.typography.titleMedium
                     )
                     NavigationDrawerItem(
@@ -112,7 +113,7 @@ fun DashboardScreen(
                         selected = false,
                         icon = {
                             Icon(
-                                Icons.Outlined.MailOutline ,
+                                Icons.Outlined.MailOutline,
                                 contentDescription = null
                             )
                         },
