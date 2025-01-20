@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -35,6 +36,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -173,21 +175,37 @@ private fun CategoryItemTemplate(
 
 
 @Composable
-fun SimpleSectionTemplate(modifier: Modifier = Modifier) {
+fun SimpleSectionTemplate(title: String = "Easy & Simple Recipe") {
     Row(Modifier.padding(top = 16.dp)) {
-        Column(Modifier.weight(1f)) { Text("Easy & Simple Recipe") }
-        Column(Modifier.weight(1f), horizontalAlignment = Alignment.End) { Text("See More") }
+        Column(Modifier.weight(1f)) {
+            Text(
+                title,
+                fontWeight = FontWeight.Bold
+            )
+        }
+        Column(Modifier.weight(1f), horizontalAlignment = Alignment.End) {
+            Text(
+                "See More",
+                color = Color(0xFFFF9B05),
+                fontWeight = FontWeight.Bold
+            )
+        }
     }
 }
 
+
 @Composable
-fun SimpleRecipeItemList(recipes: List<RecipeUser> = emptyList()) {
-    if (recipes.isNotEmpty()) {
-        LazyRow {
-            items(recipes.size, itemContent = { index ->
-                val currentRecipe = recipes[index]
-                SimpleRecipeItemInfoTemplate(recipeUser = currentRecipe)
-            })
+fun GroupedRecipesList(groupedRecipes: Map<String?, List<RecipeUser>>) {
+    LazyColumn {
+        items(groupedRecipes.size) { index ->
+            SimpleSectionTemplate(groupedRecipes.keys.elementAt(index) ?: "")
+            LazyRow {
+                items(groupedRecipes.values.elementAt(index).size) { pos ->
+                    val currentRecipe = groupedRecipes.values.elementAt(index)[pos]
+                    SimpleRecipeItemInfoTemplate(recipeUser = currentRecipe)
+                }
+            }
+
         }
     }
 }
@@ -270,32 +288,13 @@ fun SimpleRecipeHome(
         }
     }
 
+    val groupedRecipes = recipeUser.groupBy { it.recipe.cuisine }
+
+
     Column(Modifier.padding(start = 16.dp, end = 16.dp, top = 40.dp)) {
         TopAppBar()
         CategoryMenu()
-        SimpleSectionTemplate()
-        SimpleRecipeItemList(recipes = recipeUser)
-
-        /*if (false) {
-            Box(
-                modifier = Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center
-            ) {
-                CircularProgressIndicator()
-            }
-        } else {
-            LazyColumn {
-                items(recipes.size) { pos ->
-                    RecipeCard(recipes[pos], onItemClick = { recipe ->
-                        navController.currentBackStackEntry?.savedStateHandle?.set(
-                            "recipe",
-                            recipe
-                        )
-                        navController.navigate(NavRoute.DETAILS.name)
-                    })
-                }
-            }
-        }*/
+        GroupedRecipesList(groupedRecipes = groupedRecipes)
     }
 
 }
