@@ -8,7 +8,7 @@ import com.blueprint.composecrossdrill.domain.model.recipes.Recipe
 import com.blueprint.composecrossdrill.ui.features.dashboard.screens.DashboardScreen
 import com.blueprint.composecrossdrill.ui.features.dashboard.simplerecipe.SimpleRecipeHome
 import com.blueprint.composecrossdrill.ui.features.details.screens.DetailsScreen
-import com.blueprint.composecrossdrill.ui.features.settings.SettingsScreen
+import com.blueprint.composecrossdrill.ui.features.settings.screens.SettingsScreen
 import com.blueprint.composecrossdrill.utils.ScaleTransitionDirection
 import com.blueprint.composecrossdrill.utils.scaleIntoContainer
 import com.blueprint.composecrossdrill.utils.scaleOutOfContainer
