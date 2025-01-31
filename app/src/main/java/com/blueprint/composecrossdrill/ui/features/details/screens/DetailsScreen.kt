@@ -32,6 +32,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -48,6 +50,7 @@ import coil3.compose.AsyncImage
 import com.blueprint.composecrossdrill.R
 import com.blueprint.composecrossdrill.domain.model.recipes.Recipe
 import com.blueprint.composecrossdrill.ui.theme.spacing
+import kotlinx.coroutines.launch
 
 @OptIn(
     ExperimentalMaterial3Api::class,
@@ -55,10 +58,16 @@ import com.blueprint.composecrossdrill.ui.theme.spacing
 )
 @Composable
 fun DetailsScreen(navController: NavController, recipe: Recipe) {
+    val coroutineScope = rememberCoroutineScope()
+
+    // State to track the visibility of the bottom sheet, preserved across configuration changes
+    var showBottomSheet by rememberSaveable { mutableStateOf(false) }
+
+    // SheetState to control the bottom sheet's state
     val sheetState = rememberModalBottomSheetState(
         skipPartiallyExpanded = true
     )
-    var showBottomSheet by remember { mutableStateOf(false) }
+
     var shouldShowDialog by remember { mutableStateOf(false) }
 
     Scaffold(
@@ -82,7 +91,7 @@ fun DetailsScreen(navController: NavController, recipe: Recipe) {
         //Bottom Sheet
         if (showBottomSheet) {
             AddRecipeBottomSheet(sheetState, onDismissRequest = {
-                showBottomSheet = false
+                coroutineScope.launch { showBottomSheet = false }
             }, onRecipeSubmitRequest = {
                 showBottomSheet = false
                 shouldShowDialog = true

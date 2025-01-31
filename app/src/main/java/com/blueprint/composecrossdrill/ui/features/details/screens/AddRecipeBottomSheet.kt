@@ -9,7 +9,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -21,7 +23,8 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -30,6 +33,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.blueprint.composecrossdrill.ui.theme.spacing
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -38,10 +42,13 @@ fun AddRecipeBottomSheet(
     onDismissRequest: () -> Unit,
     onRecipeSubmitRequest: () -> Unit
 ) {
-    var title by remember { mutableStateOf("") }
-    var instructions by remember { mutableStateOf("") }
-    var cookTime by remember { mutableStateOf("") }
-    var prepTime by remember { mutableStateOf("") }
+    val coroutineScope = rememberCoroutineScope()
+    val scrollState = rememberScrollState()
+
+    var title by rememberSaveable { mutableStateOf("") }
+    var instructions by rememberSaveable { mutableStateOf("") }
+    var cookTime by rememberSaveable { mutableStateOf("") }
+    var prepTime by rememberSaveable { mutableStateOf("") }
     val cuisines = listOf("Indian", "Thai", "Italian", "Chinese")
     val mealType = listOf("Dinner", "Lunch", "Snack", "Dessert", "Breakfast")
 
@@ -53,6 +60,7 @@ fun AddRecipeBottomSheet(
             modifier = Modifier
                 .wrapContentHeight()
                 .fillMaxWidth()
+                .verticalScroll(scrollState)
                 .padding(MaterialTheme.spacing.medium),
             verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.small)
         ) {
@@ -141,6 +149,7 @@ fun AddRecipeBottomSheet(
                     .height(48.dp)
                     .align(Alignment.CenterHorizontally),
                 onClick = {
+                    coroutineScope.launch { sheetState.hide() }
                     onRecipeSubmitRequest()
                 }
             ) {
