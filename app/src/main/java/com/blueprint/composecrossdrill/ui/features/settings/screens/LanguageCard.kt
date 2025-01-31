@@ -12,8 +12,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
+import com.blueprint.composecrossdrill.R
 import com.blueprint.composecrossdrill.domain.model.language.LanguageItem
 import com.blueprint.composecrossdrill.ui.theme.spacing
 
@@ -34,7 +36,12 @@ fun LanguageCard(languageItem: LanguageItem) {
 
         Column {
             Text(text = languageItem.fullForm)
-            Text(text = "Choose ${languageItem.fullForm} as default language")
+            Text(
+                text = stringResource(
+                    R.string.choose_x_as_default_language,
+                    languageItem.fullForm
+                )
+            )
         }
     }
 }

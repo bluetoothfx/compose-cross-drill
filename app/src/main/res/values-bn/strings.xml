@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Compose Cross Drill</string>
+    <string name="change_language">Change Language</string>
+    <string name="tap_here_to_change_language">Tap Here to Change Language</string>
+    <string name="settings">Settings</string>
+    <string name="home">Home</string>
+    <string name="contact_and_support"><![CDATA[Contact & Support]]></string>
+    <string name="sample_recipe">Simple Recipe</string>
+    <string name="recipes">Recipes</string>
 </resources>

@@ -22,8 +22,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.blueprint.composecrossdrill.R
 import com.blueprint.composecrossdrill.ui.theme.spacing
 
 @OptIn(
@@ -35,7 +37,7 @@ fun SettingsScreen(navController: NavController) {
 
     Scaffold(
         topBar = {
-            TopAppBar(title = { Text("Settings") }, navigationIcon = {
+            TopAppBar(title = { Text(stringResource(R.string.settings)) }, navigationIcon = {
                 IconButton(onClick = {
                     navController.popBackStack()
                 }) {
@@ -70,8 +72,8 @@ fun SettingsScreen(navController: NavController) {
                     .background(MaterialTheme.colorScheme.onPrimary)
                     .padding(16.dp)
             ) {
-                Text(text = "Change Language")
-                Text(text = "Tap Here to Change Language")
+                Text(text = stringResource(R.string.change_language))
+                Text(text = stringResource(R.string.tap_here_to_change_language))
             }
         }
     }
