@@ -108,7 +108,9 @@ fun DashboardScreen(
                         selected = false,
                         icon = { Icon(Icons.Outlined.Settings, contentDescription = null) },
                         badge = { Text("20") }, // Placeholder
-                        onClick = { /* Handle click */ }
+                        onClick = {
+                            navController.navigate(NavRoute.SETTINGS.name)
+                        }
                     )
                     NavigationDrawerItem(
                         label = { Text("Contact Us") },
