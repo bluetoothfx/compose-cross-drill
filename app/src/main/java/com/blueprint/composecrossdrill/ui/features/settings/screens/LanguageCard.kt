@@ -1,5 +1,6 @@
 package com.blueprint.composecrossdrill.ui.features.settings.screens
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -20,11 +21,14 @@ import com.blueprint.composecrossdrill.domain.model.language.LanguageItem
 import com.blueprint.composecrossdrill.ui.theme.spacing
 
 @Composable
-fun LanguageCard(languageItem: LanguageItem) {
+fun LanguageCard(languageItem: LanguageItem, onLanguageSelected: (shortForm: String) -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(MaterialTheme.spacing.medium),
+            .padding(MaterialTheme.spacing.medium)
+            .clickable {
+                onLanguageSelected(languageItem.shortForm)
+            },
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Absolute.Left
     ) {

@@ -17,13 +17,16 @@ import com.blueprint.composecrossdrill.ui.theme.spacing
 
 
 @Composable
-fun ShowLanguageChangeDialog(onDismissRequest: () -> Unit) {
+fun ShowLanguageChangeDialog(
+    onDismissRequest: () -> Unit,
+    onLanguageSelected: (selectedLan: String) -> Unit
+) {
     Dialog(onDismissRequest = {
         onDismissRequest()
     }) {
         val languages: MutableList<LanguageItem> = mutableListOf()
         languages.add(LanguageItem("en", "English", R.drawable.ic_english))
-        languages.add(LanguageItem("Bn", "Bengali", R.drawable.ic_bangla))
+        languages.add(LanguageItem("bn", "Bengali", R.drawable.ic_bangla))
 
         LazyColumn(
             modifier = Modifier
@@ -33,7 +36,9 @@ fun ShowLanguageChangeDialog(onDismissRequest: () -> Unit) {
                 .padding(MaterialTheme.spacing.small)
         ) {
             items(languages.size) { pos ->
-                LanguageCard(languages[pos])
+                LanguageCard(languages[pos], onLanguageSelected = { selectedLan ->
+                    onLanguageSelected(selectedLan)
+                })
                 if (pos < languages.lastIndex)
                     HorizontalDivider(
                         color = MaterialTheme.colorScheme.onBackground,

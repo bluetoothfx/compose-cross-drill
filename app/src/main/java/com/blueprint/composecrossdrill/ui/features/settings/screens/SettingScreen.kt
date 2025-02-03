@@ -1,5 +1,6 @@
 package com.blueprint.composecrossdrill.ui.features.settings.screens
 
+import android.app.Activity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -22,18 +23,28 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.blueprint.composecrossdrill.R
 import com.blueprint.composecrossdrill.ui.theme.spacing
+import com.blueprint.composecrossdrill.utils.LanguageManager
+import com.blueprint.composecrossdrill.utils.LanguagePreference
+import com.blueprint.composecrossdrill.utils.getLanguagePreference
+import com.blueprint.composecrossdrill.utils.updateLocale
 
 @OptIn(
     ExperimentalMaterial3Api::class
 )
 @Composable
-fun SettingsScreen(navController: NavController) {
+fun SettingsScreen(
+    navController: NavController,
+) {
     var shouldShowLanguageDialog by remember { mutableStateOf(false) }
+    val context = LocalContext.current
+    val languageManager = LanguageManager(context)
+    val currentLanguage = getLanguagePreference()
 
     Scaffold(
         topBar = {
@@ -49,6 +60,9 @@ fun SettingsScreen(navController: NavController) {
         if (shouldShowLanguageDialog) {
             ShowLanguageChangeDialog(onDismissRequest = {
                 shouldShowLanguageDialog = false
+            }, onLanguageSelected = { selectedLan ->
+                shouldShowLanguageDialog = false
+                languageManager.setLanguage(selectedLan)
             })
         }
         Column(
