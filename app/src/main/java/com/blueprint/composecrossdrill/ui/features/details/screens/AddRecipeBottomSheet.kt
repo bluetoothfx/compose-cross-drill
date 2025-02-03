@@ -30,8 +30,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import com.blueprint.composecrossdrill.R
 import com.blueprint.composecrossdrill.ui.theme.spacing
 import kotlinx.coroutines.launch
 
@@ -67,8 +69,8 @@ fun AddRecipeBottomSheet(
             TextField(
                 value = title,
                 onValueChange = { title = it },
-                label = { Text("Recipe Title") },
-                placeholder = { Text("Enter your recipe name") },
+                label = { Text(stringResource(R.string.recipe_title)) },
+                placeholder = { Text(stringResource(R.string.recipe_title_hint)) },
                 singleLine = true,
                 modifier = Modifier
                     .fillMaxWidth()
@@ -83,8 +85,8 @@ fun AddRecipeBottomSheet(
             TextField(
                 value = instructions,
                 onValueChange = { instructions = it },
-                label = { Text("Recipe Instruction") },
-                placeholder = { Text("Enter Instructions Here") },
+                label = { Text(stringResource(R.string.instructions)) },
+                placeholder = { Text(stringResource(R.string.instructions_hint)) },
                 singleLine = false,
                 maxLines = 4,
                 modifier = Modifier
@@ -102,8 +104,8 @@ fun AddRecipeBottomSheet(
                 TextField(
                     value = cookTime,
                     onValueChange = { cookTime = it },
-                    label = { Text("Cook Time") },
-                    placeholder = { Text("Enter cook time") },
+                    label = { Text(stringResource(R.string.cook_time)) },
+                    placeholder = { Text(stringResource(R.string.cook_time_hint)) },
                     singleLine = true,
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                     modifier = Modifier
@@ -120,8 +122,8 @@ fun AddRecipeBottomSheet(
                 TextField(
                     value = prepTime,
                     onValueChange = { prepTime = it },
-                    label = { Text("Prep Time") },
-                    placeholder = { Text("Enter prep time") },
+                    label = { Text(stringResource(R.string.prep_time)) },
+                    placeholder = { Text(stringResource(R.string.prep_time_hint)) },
                     singleLine = true,
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                     modifier = Modifier
@@ -153,7 +155,7 @@ fun AddRecipeBottomSheet(
                     onRecipeSubmitRequest()
                 }
             ) {
-                Text("Submit Recipe")
+                Text(stringResource(R.string.submit_recipe))
             }
         }
     }

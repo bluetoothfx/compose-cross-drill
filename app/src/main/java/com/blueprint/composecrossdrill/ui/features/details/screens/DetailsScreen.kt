@@ -41,6 +41,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -72,7 +73,7 @@ fun DetailsScreen(navController: NavController, recipe: Recipe) {
 
     Scaffold(
         topBar = {
-            TopAppBar(title = { Text("Details") }, navigationIcon = {
+            TopAppBar(title = { Text(stringResource(R.string.details)) }, navigationIcon = {
                 IconButton(onClick = {
                     navController.popBackStack()
                 }) {
@@ -157,12 +158,12 @@ fun DetailsScreen(navController: NavController, recipe: Recipe) {
                     .padding(horizontal = MaterialTheme.spacing.medium)
             ) {
                 Text(
-                    text = "Prep Time: ${recipe.prepTimeMinutes} mins",
+                    text = stringResource(R.string.prep_time_x_mins, recipe.prepTimeMinutes ?: 0),
                     style = MaterialTheme.typography.bodyMedium,
                     modifier = Modifier.weight(1f),
                 )
                 Text(
-                    text = "Cook Time: ${recipe.cookTimeMinutes} mins",
+                    text = stringResource(R.string.cook_time_x_mins, recipe.cookTimeMinutes ?: 0),
                     style = MaterialTheme.typography.bodyMedium,
                     modifier = Modifier.weight(1f)
                 )
@@ -171,7 +172,7 @@ fun DetailsScreen(navController: NavController, recipe: Recipe) {
             Spacer(modifier = Modifier.height(MaterialTheme.spacing.small))
 
             Text(
-                text = "Ingredients",
+                text = stringResource(R.string.ingredients),
                 style = MaterialTheme.typography.bodyLarge,
                 modifier = Modifier.padding(horizontal = MaterialTheme.spacing.medium),
                 fontWeight = FontWeight.Bold
@@ -188,7 +189,7 @@ fun DetailsScreen(navController: NavController, recipe: Recipe) {
             Spacer(modifier = Modifier.height(MaterialTheme.spacing.medium))
 
             Text(
-                text = "Instructions",
+                text = stringResource(R.string.instructions),
                 style = MaterialTheme.typography.bodyLarge,
                 modifier = Modifier.padding(horizontal = MaterialTheme.spacing.medium),
                 fontWeight = FontWeight.Bold
@@ -205,7 +206,7 @@ fun DetailsScreen(navController: NavController, recipe: Recipe) {
             Spacer(modifier = Modifier.height(MaterialTheme.spacing.medium))
 
             Text(
-                text = "Tags",
+                text = stringResource(R.string.tags),
                 style = MaterialTheme.typography.bodyLarge,
                 modifier = Modifier.padding(horizontal = MaterialTheme.spacing.medium),
                 fontWeight = FontWeight.Bold
@@ -245,11 +246,11 @@ fun ShowRecipeSubmissionSuccessDialog(onDismissRequest: () -> Unit) {
         ) {
             Icon(
                 imageVector = Icons.Default.CheckCircle,
-                contentDescription = "Submitted",
+                contentDescription = stringResource(R.string.submitted),
                 modifier = Modifier.size(width = 48.dp, height = 48.dp)
             )
             Text(
-                text = "Your submission has been received.",
+                text = stringResource(R.string.submission_recived),
                 modifier = Modifier
                     .wrapContentSize(Alignment.Center),
                 textAlign = TextAlign.Center,

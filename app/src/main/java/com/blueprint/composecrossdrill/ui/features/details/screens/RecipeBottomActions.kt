@@ -19,7 +19,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.blueprint.composecrossdrill.R
 import com.blueprint.composecrossdrill.ui.theme.spacing
 
 @Composable
@@ -46,7 +48,7 @@ fun RecipeBottomActions(
                 .fillMaxWidth(.8f)
                 .height(48.dp)
         ) {
-            Text("Add Recipe")
+            Text(stringResource(R.string.add_recipe))
         }
         Spacer(modifier = Modifier.width(MaterialTheme.spacing.small))
         IconButton(

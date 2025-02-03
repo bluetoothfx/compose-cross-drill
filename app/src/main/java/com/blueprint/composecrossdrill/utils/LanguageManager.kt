@@ -4,16 +4,17 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Build
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalContext
-import java.util.*
+import java.util.Locale
 
 class LanguageManager(private val context: Context) {
+    private val PREFS_NAME = "language_pref"
+    private val LANGUAGE_KEY = "language"
+
     private val sharedPreferences: SharedPreferences =
-        context.getSharedPreferences("language_pref", Context.MODE_PRIVATE)
+        context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
 
     fun setLanguage(language: String) {
-        sharedPreferences.edit().putString("language", language).apply()
+        sharedPreferences.edit().putString(LANGUAGE_KEY, language).apply()
         val locale = Locale(language)
         Locale.setDefault(locale)
         val config = Configuration()
@@ -28,11 +29,13 @@ class LanguageManager(private val context: Context) {
     fun getLanguage(): String {
         return sharedPreferences.getString("language", "en") ?: "en"
     }
-}
 
-@Composable
-fun getLanguagePreference(): String {
-    val context = LocalContext.current
-    val languageManager = LanguageManager(context)
-    return languageManager.getLanguage()
+    fun updateLocale(context: Context): Context {
+        val language = getLanguage()
+        val locale = Locale(language)
+        Locale.setDefault(locale)
+        val config = Configuration()
+        config.setLocale(locale)
+        return context.createConfigurationContext(config)
+    }
 }

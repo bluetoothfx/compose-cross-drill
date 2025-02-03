@@ -1,6 +1,5 @@
 package com.blueprint.composecrossdrill.ui.features.settings.screens
 
-import android.app.Activity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -30,9 +29,6 @@ import androidx.navigation.NavController
 import com.blueprint.composecrossdrill.R
 import com.blueprint.composecrossdrill.ui.theme.spacing
 import com.blueprint.composecrossdrill.utils.LanguageManager
-import com.blueprint.composecrossdrill.utils.LanguagePreference
-import com.blueprint.composecrossdrill.utils.getLanguagePreference
-import com.blueprint.composecrossdrill.utils.updateLocale
 
 @OptIn(
     ExperimentalMaterial3Api::class
@@ -42,9 +38,7 @@ fun SettingsScreen(
     navController: NavController,
 ) {
     var shouldShowLanguageDialog by remember { mutableStateOf(false) }
-    val context = LocalContext.current
-    val languageManager = LanguageManager(context)
-    val currentLanguage = getLanguagePreference()
+    val languageManager = LanguageManager(LocalContext.current)
 
     Scaffold(
         topBar = {

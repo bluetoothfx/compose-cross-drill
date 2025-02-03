@@ -5,6 +5,24 @@
     <string name="settings">সেটিংস</string>
     <string name="home">হোম</string>
     <string name="contact_and_support"><![CDATA[যোগাযোগ ও সহায়তা]]></string>
+    <string name="choose_x_as_default_language">ডিফল্ট ভাষা হিসেবে %s বেছে নিন</string>
     <string name="sample_recipe">সহজ রেসিপি</string>
     <string name="recipes">রেসিপি</string>
+    <string name="submit_recipe">রেসিপি জমা দিন</string>
+    <string name="add_recipe">রেসিপি যোগ করুন</string>
+    <string name="prep_time">প্রস্তুতির সময়</string>
+    <string name="prep_time_hint">প্রস্তুতির সময় লিখুন</string>
+    <string name="cook_time">রান্নার সময়</string>
+    <string name="cook_time_hint">রান্নার সময় লিখুন</string>
+    <string name="instructions">রেসিপি নির্দেশনা</string>
+    <string name="instructions_hint">এখানে নির্দেশাবলী লিখুন</string>
+    <string name="recipe_title">রেসিপির নাম</string>
+    <string name="recipe_title_hint">আপনার রেসিপির নাম লিখুন</string>
+    <string name="submitted">জমা দেওয়া হয়েছে</string>
+    <string name="submission_recived">আপনার রেসিপি জমা দেওয়া হয়েছে।</string>
+    <string name="ingredients">উপকরণ</string>
+    <string name="tags">ট্যাগ</string>
+    <string name="prep_time_x_mins">প্রস্তুতির সময়: %d মিনিট</string>
+    <string name="cook_time_x_mins">রান্নার সময়: %d মিনিট</string>
+    <string name="details">বিস্তারিত</string>
 </resources>
