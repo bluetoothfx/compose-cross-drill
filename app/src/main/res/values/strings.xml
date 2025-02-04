@@ -1,3 +1,28 @@
 <resources>
-    <string name="app_name">composeCrossDrill</string>
+    <string name="app_name">Compose Cross Drill</string>
+    <string name="change_language">Change Language</string>
+    <string name="tap_here_to_change_language">Tap Here to Change Language</string>
+    <string name="settings">Settings</string>
+    <string name="choose_x_as_default_language">Choose %s as default language</string>
+    <string name="home">Home</string>
+    <string name="contact_and_support"><![CDATA[Contact & Support]]></string>
+    <string name="sample_recipe">Simple Recipe</string>
+    <string name="recipes">Recipes</string>
+    <string name="submit_recipe">Submit Recipe</string>
+    <string name="prep_time">Prep Time</string>
+    <string name="prep_time_hint">Enter prep time</string>
+    <string name="cook_time">Cook Time</string>
+    <string name="cook_time_hint">Enter cook time</string>
+    <string name="instructions">Recipe Instruction</string>
+    <string name="instructions_hint">Enter Instructions Here</string>
+    <string name="recipe_title">Recipe Title</string>
+    <string name="recipe_title_hint">Enter your recipe name</string>
+    <string name="submitted">Submitted</string>
+    <string name="submission_recived">Your submission has been received.</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="tags">Tags</string>
+    <string name="prep_time_x_mins">Prep Time: %d mins</string>
+    <string name="cook_time_x_mins">Cook Time: %d mins</string>
+    <string name="add_recipe">Add Recipe</string>
+    <string name="details">Details</string>
 </resources>

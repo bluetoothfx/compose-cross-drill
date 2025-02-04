@@ -11,7 +11,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material.icons.outlined.MailOutline
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.DrawerValue
@@ -34,9 +33,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
+import com.blueprint.composecrossdrill.R
 import com.blueprint.composecrossdrill.navigation.NavRoute
 import com.blueprint.composecrossdrill.ui.features.dashboard.viewmodel.DashboardViewModel
 import com.blueprint.composecrossdrill.ui.theme.spacing
@@ -72,54 +73,39 @@ fun DashboardScreen(
                 ) {
                     Spacer(Modifier.height(12.dp))
                     Text(
-                        "Compose Cross Drill",
+                        stringResource(R.string.app_name),
                         modifier = Modifier.padding(MaterialTheme.spacing.medium),
                         style = MaterialTheme.typography.titleLarge
                     )
                     HorizontalDivider()
 
                     Text(
-                        "Sample Menu",
+                        stringResource(R.string.recipes),
                         modifier = Modifier.padding(MaterialTheme.spacing.medium),
                         style = MaterialTheme.typography.titleMedium
                     )
                     NavigationDrawerItem(
-                        label = { Text("Simple Recipe") },
+                        label = { Text(stringResource(R.string.sample_recipe)) },
                         selected = false,
                         onClick = {
                             navController.navigate(NavRoute.SIMPLE_RECIPE_HOME.name)
                         }
                     )
-                    NavigationDrawerItem(
-                        label = { Text("Item 2") },
-                        selected = false,
-                        onClick = { /* Handle click */ }
-                    )
-
                     HorizontalDivider(modifier = Modifier.padding(vertical = MaterialTheme.spacing.small))
 
                     Text(
-                        "Contact & Support",
+                        stringResource(R.string.contact_and_support),
                         modifier = Modifier.padding(MaterialTheme.spacing.medium),
                         style = MaterialTheme.typography.titleMedium
                     )
                     NavigationDrawerItem(
-                        label = { Text("Settings") },
+                        label = { Text(stringResource(R.string.settings)) },
                         selected = false,
                         icon = { Icon(Icons.Outlined.Settings, contentDescription = null) },
                         badge = { Text("20") }, // Placeholder
-                        onClick = { /* Handle click */ }
-                    )
-                    NavigationDrawerItem(
-                        label = { Text("Contact Us") },
-                        selected = false,
-                        icon = {
-                            Icon(
-                                Icons.Outlined.MailOutline,
-                                contentDescription = null
-                            )
-                        },
-                        onClick = { },
+                        onClick = {
+                            navController.navigate(NavRoute.SETTINGS.name)
+                        }
                     )
                     Spacer(Modifier.height(12.dp))
                 }
@@ -129,7 +115,7 @@ fun DashboardScreen(
     ) {
         Scaffold(
             topBar = {
-                TopAppBar(title = { Text("Home") }, navigationIcon = {
+                TopAppBar(title = { Text(stringResource(R.string.home)) }, navigationIcon = {
                     IconButton(onClick = {
                         scope.launch { drawerState.open() }
                     }) {
