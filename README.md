@@ -1,5 +1,5 @@
 
-# Jetpcak Compose Cross Drill
+# Jetpack Compose Cross Drill
 
 A powerful and flexible Jetpack Compose app template designed to help kickstart Android projects with modern best practices. This template includes essential core features like MVVM architecture, Dependency Injection, Multilingual support, Theming, and more.
 
