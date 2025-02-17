@@ -19,15 +19,56 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    buildFeatures{
+        buildConfig = true
+    }
+
     buildTypes {
-        release {
+        debug {
             isMinifyEnabled = false
+            isShrinkResources = false
+            isDebuggable = true
+
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+        release {
+            isMinifyEnabled = true
+            isShrinkResources = true
+            isDebuggable = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
         }
     }
+
+    flavorDimensions += "environment"
+
+    productFlavors {
+        create("qa") {
+            dimension = "environment"
+            applicationIdSuffix = ".staging"
+            resValue("string", "app_name", "MyApp (QA)")
+            buildConfigField("String", "API_BASE_URL", "\"https://dummyjson.com/\"")
+        }
+
+        create("uat") {
+            dimension = "environment"
+            applicationIdSuffix = ".preprod"
+            resValue("string", "app_name", "MyApp (UAT)")
+            buildConfigField("String", "API_BASE_URL", "\"https://dummyjson.com/\"")
+        }
+
+        create("prod") {
+            dimension = "environment"
+            resValue("string", "app_name", "MyApp")
+            buildConfigField("String", "API_BASE_URL", "\"https://dummyjson.com/\"")
+        }
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11

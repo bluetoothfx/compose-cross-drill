@@ -1,5 +1,6 @@
 package com.blueprint.composecrossdrill.di
 
+import com.blueprint.composecrossdrill.BuildConfig
 import com.blueprint.composecrossdrill.domain.service.DashboardService
 import com.blueprint.composecrossdrill.domain.service.LoginService
 import okhttp3.OkHttpClient
@@ -26,7 +27,7 @@ fun provideRetrofit(
     gsonConverterFactory: GsonConverterFactory
 ): Retrofit {
     return Retrofit.Builder()
-        .baseUrl("https://dummyjson.com/")
+        .baseUrl(BuildConfig.API_BASE_URL)
         .client(okHttpClient)
         .addConverterFactory(gsonConverterFactory)
         .build()
