@@ -51,6 +51,7 @@ android {
         create("qa") {
             dimension = "environment"
             applicationIdSuffix = ".staging"
+            applicationId = "com.blueprint.composecrossdrill.qa"
             resValue("string", "app_name", "MyApp (QA)")
             buildConfigField("String", "API_BASE_URL", "\"https://dummyjson.com/\"")
         }
@@ -58,12 +59,14 @@ android {
         create("uat") {
             dimension = "environment"
             applicationIdSuffix = ".preprod"
+            applicationId = "com.blueprint.composecrossdrill.uat"
             resValue("string", "app_name", "MyApp (UAT)")
             buildConfigField("String", "API_BASE_URL", "\"https://dummyjson.com/\"")
         }
 
         create("prod") {
             dimension = "environment"
+            applicationId = "com.blueprint.composecrossdrill"
             resValue("string", "app_name", "MyApp")
             buildConfigField("String", "API_BASE_URL", "\"https://dummyjson.com/\"")
         }
