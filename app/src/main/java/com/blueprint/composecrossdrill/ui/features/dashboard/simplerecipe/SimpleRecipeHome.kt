@@ -48,6 +48,7 @@ import com.blueprint.composecrossdrill.R
 import com.blueprint.composecrossdrill.domain.model.category.RecipeCategory
 import com.blueprint.composecrossdrill.domain.model.recipes.RecipeUser
 import com.blueprint.composecrossdrill.ui.features.dashboard.viewmodel.DashboardViewModel
+import com.blueprint.composecrossdrill.utils.components.network.ResultWrapper
 import org.koin.androidx.compose.koinViewModel
 
 
@@ -283,18 +284,20 @@ fun SimpleRecipeHome(
     val recipeUser by dashboardViewModel.recipeUser.collectAsState()
 
     LaunchedEffect(Lifecycle.State.CREATED) {
-        if (recipeUser.isEmpty()) {
+        if (recipeUser is ResultWrapper.Loading || recipeUser is ResultWrapper.Failure) {
             dashboardViewModel.getRecipeUser()
         }
     }
 
-    val groupedRecipes = recipeUser.groupBy { it.recipe.cuisine }
-
-
-    Column(Modifier.padding(start = 16.dp, end = 16.dp, top = 40.dp)) {
-        TopAppBar()
-        CategoryMenu()
-        GroupedRecipesList(groupedRecipes = groupedRecipes)
+    val groupedRecipes = recipeUser.getOrNull()?.let { it ->
+        it.groupBy { it.recipe.cuisine }
     }
 
+    groupedRecipes?.let {
+        Column(Modifier.padding(start = 16.dp, end = 16.dp, top = 40.dp)) {
+            TopAppBar()
+            CategoryMenu()
+            GroupedRecipesList(groupedRecipes = it)
+        }
+    }
 }

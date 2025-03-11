@@ -41,6 +41,7 @@ import com.blueprint.composecrossdrill.R
 import com.blueprint.composecrossdrill.navigation.NavRoute
 import com.blueprint.composecrossdrill.ui.features.dashboard.viewmodel.DashboardViewModel
 import com.blueprint.composecrossdrill.ui.theme.spacing
+import com.blueprint.composecrossdrill.utils.components.network.ResultWrapper
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 
@@ -50,15 +51,14 @@ fun DashboardScreen(
     dashboardViewModel: DashboardViewModel = koinViewModel(),
     navController: NavController
 ) {
-    val recipes by dashboardViewModel.recipe.collectAsState()
-    val isLoading by dashboardViewModel.isLoading.collectAsState()
+    val recipesResult by dashboardViewModel.recipe.collectAsState()
 
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
 
-
+    // Fetch recipes if empty (only when the screen is first created)
     LaunchedEffect(Lifecycle.State.CREATED) {
-        if (recipes.isEmpty()) {
+        if (recipesResult is ResultWrapper.Loading || recipesResult is ResultWrapper.Failure) {
             dashboardViewModel.getRecipes()
         }
     }
@@ -125,23 +125,40 @@ fun DashboardScreen(
             }
         ) { innerPadding ->
             Column(Modifier.padding(innerPadding)) {
-                if (isLoading) {
-                    Box(
-                        modifier = Modifier.fillMaxSize(),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        CircularProgressIndicator()
+                when (val result = recipesResult) {
+                    is ResultWrapper.Loading -> {
+                        Box(
+                            modifier = Modifier.fillMaxSize(),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            CircularProgressIndicator()
+                        }
                     }
-                } else {
-                    LazyColumn {
-                        items(recipes.size) { pos ->
-                            RecipeCard(recipes[pos], onItemClick = { recipe ->
-                                navController.currentBackStackEntry?.savedStateHandle?.set(
-                                    "recipe",
-                                    recipe
-                                )
-                                navController.navigate(NavRoute.DETAILS.name)
-                            })
+
+                    is ResultWrapper.Success -> {
+                        LazyColumn {
+                            items(result.data.size) { pos ->
+                                RecipeCard(result.data[pos], onItemClick = { recipe ->
+                                    navController.currentBackStackEntry?.savedStateHandle?.set(
+                                        "recipe",
+                                        recipe
+                                    )
+                                    navController.navigate(NavRoute.DETAILS.name)
+                                })
+                            }
+                        }
+                    }
+
+                    is ResultWrapper.Failure -> {
+                        Box(
+                            modifier = Modifier.fillMaxSize(),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(
+                                text = "Error: ${result.message}",
+                                style = MaterialTheme.typography.titleMedium,
+                                color = MaterialTheme.colorScheme.error
+                            )
                         }
                     }
                 }
@@ -149,3 +166,4 @@ fun DashboardScreen(
         }
     }
 }
+
