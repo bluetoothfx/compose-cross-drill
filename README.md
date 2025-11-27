@@ -3,6 +3,8 @@
 
 A powerful and flexible Jetpack Compose app template designed to help kickstart Android projects with modern best practices. This template includes essential core features like MVVM architecture, Dependency Injection, Multilingual support, Theming, and more.
 
+Don't forget to check our [Wiki](https://github.com/bluetoothfx/compose-cross-drill/wiki)
+
 ## Features
 
 - Composeables – Fully built with Jetpack Compose for a modern UI experience.
